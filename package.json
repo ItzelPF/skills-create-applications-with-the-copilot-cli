@@ -1,0 +1,15 @@
+{
+  "name": "skills-create-applications-with-the-copilot-cli",
+  "version": "1.0.0",
+  "description": "Calculator CLI and library",
+  "main": "src/calculator.js",
+  "scripts": {
+    "test": "jest --runInBand"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "dependencies": {
+    "jest": "^29.7.0"
+  }
+}
