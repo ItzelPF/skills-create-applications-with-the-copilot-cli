@@ -1,14 +1,17 @@
 const calc = require('../calculator.js');
 
-describe('Calculator - basic operations and edge cases', () => {
+describe('Calculator - basic and extended operations with edge cases', () => {
   test('module exports functions', () => {
     expect(typeof calc.add).toBe('function');
     expect(typeof calc.subtract).toBe('function');
     expect(typeof calc.multiply).toBe('function');
     expect(typeof calc.divide).toBe('function');
+    expect(typeof calc.modulo).toBe('function');
+    expect(typeof calc.power).toBe('function');
+    expect(typeof calc.squareRoot).toBe('function');
   });
 
-  // Examples from provided image
+  // Examples from provided image (basic)
   test('2 + 3 = 5', () => {
     expect(calc.add(2, 3)).toBe(5);
   });
@@ -25,7 +28,20 @@ describe('Calculator - basic operations and edge cases', () => {
     expect(calc.divide(20, 5)).toBe(4);
   });
 
-  // Additional correctness & edge cases
+  // Extended operations tests (from image)
+  test('modulo: 5 % 2 = 1', () => {
+    expect(calc.modulo(5, 2)).toBe(1);
+  });
+
+  test('power: 2 ^ 3 = 8', () => {
+    expect(calc.power(2, 3)).toBe(8);
+  });
+
+  test('squareRoot: sqrt(16) = 4', () => {
+    expect(calc.squareRoot(16)).toBe(4);
+  });
+
+  // Edge cases & additional checks
   test('addition with floats: 0.1 + 0.2 ~= 0.3', () => {
     expect(calc.add(0.1, 0.2)).toBeCloseTo(0.3, 10);
   });
@@ -47,6 +63,23 @@ describe('Calculator - basic operations and edge cases', () => {
   test('division by zero throws RangeError', () => {
     expect(() => calc.divide(1, 0)).toThrow(RangeError);
     expect(() => calc.divide(0, 0)).toThrow(RangeError);
+  });
+
+  test('modulo by zero throws RangeError', () => {
+    expect(() => calc.modulo(5, 0)).toThrow(RangeError);
+  });
+
+  test('squareRoot of negative number throws RangeError', () => {
+    expect(() => calc.squareRoot(-9)).toThrow(RangeError);
+  });
+
+  test('power with large exponents', () => {
+    expect(calc.power(2, 10)).toBe(1024);
+  });
+
+  test('modulo with negative numbers follows JS % semantics', () => {
+    expect(calc.modulo(-5, 2)).toBe(-1);
+    expect(calc.modulo(5, -2)).toBe(1);
   });
 
   test('divide produces float when necessary', () => {
